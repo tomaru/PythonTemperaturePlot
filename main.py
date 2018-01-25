@@ -28,7 +28,7 @@ def index():
 	temp_list = []
 	for record in records:
 		temp_list.append({'date':record['date'].strftime("%Y-%m-%d %H:%M"), 'temp':record['temp']})
-	return render_template('index.html',title="title", temp_list=temp_list)
+	return render_template('index.html',title="TemperatureGraph", temp_list=temp_list)
 
 #=====================================================#
 
