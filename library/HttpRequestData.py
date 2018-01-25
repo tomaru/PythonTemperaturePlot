@@ -130,7 +130,6 @@ class HttpRequestData(object):
 
 	def __init__(self):
 		""" initialize: set urllib2.opener """
-		self.buy_push_flg = False
 
 #=====================================================#
 
@@ -174,61 +173,6 @@ class HttpRequestData(object):
 				self.log(log_depth, log_name, "FAILURE: access to %s" % (url))
 		return decoded_html
 		#sys.exit("[EXIT] cannot reach %s" % (url))
-
-#=====================================================#
-
-# 画像をダウンロードする
-	def download_image(self, url, timeout = 10):
-		log_depth = 1
-		log_name = "Down Image"
-		response = requests.get(url, allow_redirects=False, timeout=timeout)
-			
-		if response.status_code != requests.codes.ok:
-		#	self.log(log_depth, log_name, "SUCCESS: access to %s" % (url))
-		#else:
-		#	self.log(log_depth, log_name, "FAILURE: access to %s" % (url))
-			e = Exception("HTTP status: " + response.status_code)
-			raise e
-
-		content_type = response.headers["content-type"]
-		if 'image' not in content_type:
-			e = Exception("Content-Type: " + content_type)
-			raise e
-
-		return response.content
-
-#=====================================================#
-
-# 画像を保存する
-	def save_image(self, url, image):
-		log_depth = 1
-		log_name = "Save Image"
-		
-		file_path = ""
-		d = datetime.datetime.today()
-		date_str = "%s-%s-%s_%s:%s:%s" % (d.year, d.month, d.day, d.hour, d.minute, d.second)
-
-		dir_path = read_config("Log", "img_dir")
-		# OSによって決まっているセパレータ記号に置換する
-		dir_path = dir_path.replace('/',os.sep)
-		filename = os.path.basename(url)
-		file_name, ext = os.path.splitext(filename)
-		name_extension = ext
-
-		# ":"はWindows では使えないため置換する
-		date_str = date_str.replace(":", "_");
-
-		file_path = os.path.join(dir_path, file_name + "~" + date_str + ".txt")
-		with open(file_path, "w") as fout:
-			fout.write(url)
-			
-		file_path = os.path.join(dir_path, file_name + "~" + date_str + name_extension)
-		
-		with open(file_path, "wb") as fout:
-			fout.write(image)
-		#self.log(log_depth, log_name, "SUCCESS: save = %s" % (url))
-		
-		return file_path
 
 #=====================================================#
 	
