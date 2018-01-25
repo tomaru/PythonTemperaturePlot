@@ -32,10 +32,6 @@ def index():
 
 #=====================================================#
 
-client = MongoClient('localhost', 27017)
-db = client['test-database']
-collection = db["Index"]
-
 def save_db( temp, date=None):
 	
 	data = {}
