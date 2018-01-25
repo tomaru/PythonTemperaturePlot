@@ -13,9 +13,7 @@ from library import HttpRequestData
 from pymongo import MongoClient
 from datetime import datetime
 
-import time
-
-from flask import Flask, render_template, request, redirect, url_for, send_from_directory, session
+from flask import Flask, render_template
 
 app = Flask(__name__)
 
