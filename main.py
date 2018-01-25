@@ -22,7 +22,6 @@ app = Flask(__name__)
 @app.route('/')
 def index():
 	records=collection.find()
-	print(records)
 	temp_list = []
 	for record in records:
 		temp_list.append({'date':record['date'].strftime("%Y-%m-%d %H:%M"), 'temp':record['temp']})
