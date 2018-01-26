@@ -7,11 +7,11 @@ import os,sys
 import signal
 import time
 import threading
+import datetime
 
 from library import HttpRequestData
 
 from pymongo import MongoClient
-from datetime import datetime
 
 from flask import Flask, render_template
 
@@ -19,6 +19,7 @@ app = Flask(__name__)
 
 #=====================================================#
 
+#すべての情報を取得する
 @app.route('/')
 def index():
 	records=collection.find()
@@ -27,13 +28,23 @@ def index():
 		temp_list.append({'date':record['date'].strftime("%Y-%m-%d %H:%M"), 'temp':record['temp']})
 	return render_template('index.html',title="TemperatureGraph", temp_list=temp_list)
 
+#h時間前からの情報を取得する
+@app.route('/hour/<int:h>')
+def hour(h):
+	query = { "date" : { "$gte" : datetime.datetime.now() - datetime.timedelta(hours=h) } };
+	
+	records=collection.find(query)
+	temp_list = []
+	for record in records:
+		temp_list.append({'date':record['date'].strftime("%Y-%m-%d %H:%M"), 'temp':record['temp']})
+	return render_template('index.html',title="TemperatureGraph", temp_list=temp_list)
 #=====================================================#
 
 def save_db( temp, date=None):
 	
 	data = {}
 	if date == None:
-		data['date'] =  datetime.now()
+		data['date'] =  datetime.datetime.now()
 	else:
 		data['date'] =  date
 	data['temp'] = temp 
