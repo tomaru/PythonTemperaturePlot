@@ -183,7 +183,7 @@ class HttpRequestData(object):
 		
 		html = self._open_url(page_url)
 		if( html != "" ):
-			soup = BeautifulSoup(html, "html5lib")
+			soup = BeautifulSoup(html, "html.parser")
 			tds = soup.find_all('td')
 			temperature = tds[0].text
 			humidity = tds[1].text
