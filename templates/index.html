@@ -5,16 +5,34 @@
       google.setOnLoadCallback(drawChart);
       function drawChart() {
         var data = google.visualization.arrayToDataTable([
-          ['Date', 'Temp'],
+          ['Date', 'Temp', 'Temp2'],
         {% for record in temp_list %}
-          ['{{record.date}}',  {{record.temp}}],
+          ['{{record.date}}',  {{record.temp}},  {{record.temp2}}],
         {% endfor %}
         ]);
         // グラフのオプションを設定
         var options = {
-          title: '{{title}}'
+          title: "Temperature"
         };
         var chart = new google.visualization.LineChart(document.getElementById('chart_div'));
+        chart.draw(data, options);
+      }
+    </script>
+    <script type="text/javascript">
+      google.load("visualization", "1", {packages:["corechart"]});
+      google.setOnLoadCallback(drawChart);
+      function drawChart() {
+        var data = google.visualization.arrayToDataTable([
+          ['Date', 'humidity'],
+        {% for record in temp_list %}
+          ['{{record.date}}',  {{record.humidity}}],
+        {% endfor %}
+        ]);
+        // グラフのオプションを設定
+        var options = {
+          title: "Humidity"
+        };
+        var chart = new google.visualization.LineChart(document.getElementById('chart_div_humidity'));
         chart.draw(data, options);
       }
     </script>

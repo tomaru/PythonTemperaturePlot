@@ -179,6 +179,7 @@ class HttpRequestData(object):
 	def get_temperature(self, page_url):
 		
 		temperature = 0
+		temperature2 = 0
 		humidity = 0
 		
 		html = self._open_url(page_url)
@@ -186,9 +187,10 @@ class HttpRequestData(object):
 			soup = BeautifulSoup(html, "html.parser")
 			tds = soup.find_all('td')
 			temperature = tds[0].text
-			humidity = tds[1].text
+			temperature2 = tds[1].text
+			humidity = tds[2].text
 		
-		return temperature, humidity
+		return temperature,temperature2, humidity
 #=====================================================#
 
 if __name__ == "__main__":
