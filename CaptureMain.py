@@ -39,7 +39,7 @@ if __name__ == "__main__":
 		# 気温と湿度を取得する
 		temp1,temp2,humidity = getdata.get_temperature("http://192.168.2.100/")
 		time.sleep(3)
-		if temp2!="-128":
+		if temp2!=-999:
 			# データベースへ保存する
 			#print("temp1 %s" % temp1)
 			#print("temp2 %s" % temp2)

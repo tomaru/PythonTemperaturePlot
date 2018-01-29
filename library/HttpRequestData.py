@@ -178,9 +178,9 @@ class HttpRequestData(object):
 	
 	def get_temperature(self, page_url):
 		
-		temperature = 0
-		temperature2 = 0
-		humidity = 0
+		temperature = -999
+		temperature2 = -999
+		humidity = -999
 		
 		html = self._open_url(page_url)
 		if( html != "" ):
