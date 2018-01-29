@@ -4,10 +4,12 @@
       google.load("visualization", "1", {packages:["corechart"]});
       google.setOnLoadCallback(drawChart);
       function drawChart() {
-        var data = google.visualization.arrayToDataTable([
-          ['Date', 'Temp', 'Temp2'],
-        {% for record in temp_list %}
-          ['{{record.date}}',  {{record.temp}},  {{record.temp2}}],
+        var dataTable= new google.visualization.DataTable();
+        dataTable.addColumn('datetime','DateTime');
+        dataTable.addColumn('number','Temp1');
+        dataTable.addColumn('number','Temp2');
+        dataTable.addRows([
+        {% for record in temp_list %}[new Date({{record.date}}),{{record.temp}}, {{record.temp2}}],
         {% endfor %}
         ]);
         // グラフのオプションを設定
@@ -15,17 +17,18 @@
           title: "Temperature"
         };
         var chart = new google.visualization.LineChart(document.getElementById('chart_div'));
-        chart.draw(data, options);
+        chart.draw(dataTable, options);
       }
     </script>
     <script type="text/javascript">
       google.load("visualization", "1", {packages:["corechart"]});
       google.setOnLoadCallback(drawChart);
       function drawChart() {
-        var data = google.visualization.arrayToDataTable([
-          ['Date', 'humidity'],
-        {% for record in temp_list %}
-          ['{{record.date}}',  {{record.humidity}}],
+        var dataTable= new google.visualization.DataTable();
+        dataTable.addColumn('datetime','DateTime');
+        dataTable.addColumn('number','humidity');
+        dataTable.addRows([
+        {% for record in temp_list %}[new Date({{record.date}}),{{record.humidity}}],
         {% endfor %}
         ]);
         // グラフのオプションを設定
@@ -33,7 +36,7 @@
           title: "Humidity"
         };
         var chart = new google.visualization.LineChart(document.getElementById('chart_div_humidity'));
-        chart.draw(data, options);
+        chart.draw(dataTable, options);
       }
     </script>
 {% endblock %}

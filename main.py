@@ -20,7 +20,7 @@ def index():
 	records=collection.find()
 	temp_list = []
 	for record in records:
-		temp_list.append({'date':record['date'].strftime("%Y-%m-%d %H:%M"), 'temp':record['temp1'], 'temp2':record['temp2'], 'humidity':record['humidity']})
+		temp_list.append({'date':record['date'].strftime("%Y,%m,%d,%H,%M,%S"), 'temp':record['temp1'], 'temp2':record['temp2'], 'humidity':record['humidity']})
 	return render_template('index.html', temp_list=temp_list)
 
 #h時間前からの情報を取得する
@@ -31,7 +31,7 @@ def hour(h):
 	records=collection.find(query)
 	temp_list = []
 	for record in records:
-		temp_list.append({'date':record['date'].strftime("%Y-%m-%d %H:%M"), 'temp':record['temp1'], 'temp2':record['temp2'], 'humidity':record['humidity']})
+		temp_list.append({'date':record['date'].strftime("%Y,%m,%d,%H,%M,%S"), 'temp':record['temp1'], 'temp2':record['temp2'], 'humidity':record['humidity']})
 	return render_template('index.html', temp_list=temp_list)
 
 #=====================================================#
