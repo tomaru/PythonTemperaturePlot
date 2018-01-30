@@ -40,3 +40,29 @@
       }
     </script>
 {% endblock %}
+{% block inputdate %}
+ <form action="/post" method="post" >
+<table border="1" cellpadding="5" cellspacing="0">
+<tr><th>Start Date</th><th>End Date</th></tr>
+<tr>
+<td>
+    <input type="date" name="date_start"  list="data_table"  style="width:150px;height:150px" >
+    <datalist id="data_table">
+       {% for record in date_list %}
+    <option value="{{record}}">{{record}}</option>
+       {% endfor %}
+    </datalist>
+</td>
+<td>
+    <input type="date" name="date_end"  list="data_table"  style="width:150px;height:150px" >
+    <datalist id="data_table">
+       {% for record in date_list %}
+    <option value="{{record}}">{{record}}</option>
+       {% endfor %}
+    </datalist>
+</td>
+</tr>
+</table>
+   <input type="submit" name="" value="SUBMIT" style="width:200px;height:100px">
+</form>
+{% endblock %}
