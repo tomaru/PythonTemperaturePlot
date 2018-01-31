@@ -56,7 +56,11 @@ def post():
 		date_start = request.form['date_start']
 		date_end = request.form['date_end']
 		if date_start != "" and date_end != "":
-			query = { "date" : { "$gte" : datetime.datetime.strptime(date_start, '%Y-%m-%d') ,"$lte": datetime.datetime.strptime(date_end, '%Y-%m-%d') } };
+			datetime_start = datetime.datetime.strptime(date_start, '%Y-%m-%d')
+			datetime_end = datetime.datetime.strptime(date_end, '%Y-%m-%d')
+			# 終了日は24:00までなので1日後とする
+			datetime_end += datetime.timedelta(days = 1)
+			query = { "date" : { "$gte" : datetime_start ,"$lte": datetime_end } };
 			records=collection.find(query)
 		else:
 			records=collection.find()
