@@ -9,7 +9,7 @@
         dataTable.addColumn('number','Temp1');
         dataTable.addColumn('number','Temp2');
         dataTable.addRows([
-        {% for record in temp_list %}[new Date({{record.date}}),{{record.temp}}, {{record.temp2}}],
+        {% for record in temp_list %}[new Date("{{record.date}}"),{{record.temp}}, {{record.temp2}}],
         {% endfor %}
         ]);
         // グラフのオプションを設定
@@ -28,7 +28,7 @@
         dataTable.addColumn('datetime','DateTime');
         dataTable.addColumn('number','humidity');
         dataTable.addRows([
-        {% for record in temp_list %}[new Date({{record.date}}),{{record.humidity}}],
+        {% for record in temp_list %}[new Date("{{record.date}}"),{{record.humidity}}],
         {% endfor %}
         ]);
         // グラフのオプションを設定

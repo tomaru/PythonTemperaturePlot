@@ -31,7 +31,7 @@ def sample_temp(records):
 		# サンプル間隔以上の場合に送信データを追加する
 		if ii >= sample_times :
 			ii = 0
-			temp_list.append({'date':record['date'].strftime("%Y,%m,%d,%H,%M,%S"), 'temp':record['temp1'], 'temp2':record['temp2'], 'humidity':record['humidity']})
+			temp_list.append({'date':record['date'].strftime("%Y/%m/%d %H:%M:%S"), 'temp':record['temp1'], 'temp2':record['temp2'], 'humidity':record['humidity']})
 	return temp_list, date_list
 
 #すべての情報を取得する
